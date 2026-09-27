@@ -1,0 +1,26 @@
+node_modules/
+dist/
+target/
+src-tauri/target/
+src-tauri/gen/schemas/
+*.log
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+pipeline/models/*.onnx
+pipeline/models/*.pt
+pipeline/models/*.pth
+.cappycat-cache/
+# user media
+clips/*
+!clips/README.md
+characters/.cache/
+# user clip folders next to the project (any folder whose name contains "clip" except the docs README)
+/*[Cc]lip*/
+!/clips/
+# downloaded model weights / caches
+pipeline/models/*/
+projects/
+exports/
+installers/

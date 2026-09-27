@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cappycat-pipeline"
+version = "0.1.0"
+description = "Cappycat local CV/audio analysis pipeline: shot detection, duplicate-character remediation, reframing, loudness and beat analysis."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+  "numpy>=1.26",
+  "opencv-python-headless>=4.9",
+  "scenedetect>=0.6.4",
+  "onnxruntime>=1.17",
+  "scipy>=1.11",
+  "clarabel>=0.9",
+  "osqp>=1.0",
+]
+
+[project.optional-dependencies]
+# Full ML path. Install torch + torchvision from the PyTorch index FIRST so pip keeps the CUDA
+# build (pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130),
+# then `pip install -e ".[ml]"` and `python -m cappycat_pipeline download-models`.
+ml = [
+  "torch>=2.9",
+  "torchvision>=0.24",
+  "ultralytics>=8.3",
+  "clip @ git+https://github.com/ultralytics/CLIP.git",
+  "open_clip_torch>=3.0",
+  "transformers>=4.56",
+  "accelerate>=1.0",
+  "huggingface_hub>=0.34",
+  "onnx>=1.16",
+  "onnxscript>=0.3",
+  "librosa>=0.10",
+  "demucs>=4.1",
+]
+# Voice / background separation only (Demucs v4; torchaudio not needed). Install with --no-deps if pip
+# would re-resolve torch: pip install --no-deps demucs==4.1.0 julius einops lameenc sphn
+separation = ["demucs>=4.1"]
+# Grounded SAM 2 fallback only (Grounding DINO + SAM 2.1 via transformers; included in [ml]).
+gsam = ["transformers>=4.56", "accelerate>=1.0", "huggingface_hub>=0.34"]
+# onnxruntime with CUDA for the TransNetV2 ONNX path. Replaces the CPU `onnxruntime` (same
+# module): `pip uninstall -y onnxruntime` before installing this extra.
+onnx-gpu = ["onnxruntime-gpu>=1.20"]
+audio = ["librosa>=0.10"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+cappycat-pipeline = "cappycat_pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["cappycat_pipeline*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+  "gpu: needs torch with CUDA and the downloaded models (python -m cappycat_pipeline download-models); skipped otherwise",
+]

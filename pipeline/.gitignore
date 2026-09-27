@@ -1,0 +1,15 @@
+.venv/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.egg-info/
+models/*.onnx
+models/*.pt
+models/*.pth
+models/*.part
+models/*.part.onnx
+# downloaded caches (download-models)
+models/hf/
+models/torch/
+models/clip/
+models/ultralytics/

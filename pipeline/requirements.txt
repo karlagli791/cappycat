@@ -1,0 +1,9 @@
+# Base (lite-mode) requirements. Everything the `analyze` command needs without ML weights.
+numpy>=1.26
+opencv-python-headless>=4.9
+scenedetect>=0.6.4
+onnxruntime>=1.17
+scipy>=1.11
+# camera-path planning for smooth reframing (convex QP solvers)
+clarabel>=0.9
+osqp>=1.0

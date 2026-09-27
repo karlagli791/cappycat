@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "description": "Main cast. Every character marked unique should appear at most once in a frame; two instances of the same unique character in one frame is a duplicate-character artifact.",
+  "characters": [
+    {
+      "id": "suzie",
+      "name": "Suzie",
+      "species": "squirrel",
+      "unique": true,
+      "prompts": [
+        "cartoon squirrel",
+        "squirrel character"
+      ],
+      "features": "red-brown fur, big bushy tail, purple eyes, brass goggles with a purple strap on her head, cream t-shirt, orange overalls with yellow and purple buttons and a twig, purple sneakers",
+      "palette": [
+        "#b5652b",
+        "#e9dcc6",
+        "#d9782e",
+        "#7b5ca8",
+        "#8a6a3a"
+      ],
+      "references": [
+        {
+          "image": "suzie_sheet.webp",
+          "note": "character sheet: front, side, back, thinking, surprised"
+        },
+        {
+          "image": "group_lineup.webp",
+          "lineupIndex": 5
+        }
+      ]
+    },
+    {
+      "id": "raccoon",
+      "name": "Raccoon",
+      "species": "raccoon",
+      "unique": true,
+      "prompts": [
+        "cartoon raccoon",
+        "raccoon character"
+      ],
+      "features": "grey fur with black eye mask, brown eyes, striped tail, red hoodie, dark plaid backpack, charcoal joggers, black and red sneakers",
+      "palette": [
+        "#8b8b8b",
+        "#f1ece4",
+        "#2a2522",
+        "#8e2b2b",
+        "#3a3a3a"
+      ],
+      "references": [
+        {
+          "image": "raccoon_sheet.webp",
+          "note": "character sheet: front, left, back, right, neutral, cheerful"
+        },
+        {
+          "image": "group_lineup.webp",
+          "lineupIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "turtle",
+      "name": "Turtle",
+      "species": "turtle",
+      "unique": true,
+      "prompts": [
+        "cartoon turtle",
+        "turtle character"
+      ],
+      "features": "young turtle, lime-green skin with darker scale patches, brown eyes, navy baseball cap worn backwards, royal-blue t-shirt, black shorts with white stripes, black sneakers, shell-pattern backpack, often holds a soccer ball",
+      "palette": [
+        "#8aa03a",
+        "#c9c060",
+        "#27447e",
+        "#2a2a2a",
+        "#f2f2f2"
+      ],
+      "references": [
+        {
+          "image": "turtle_sheet.webp",
+          "note": "character sheet: front, left, back, right, neutral, cheerful"
+        },
+        {
+          "image": "group_lineup.webp",
+          "lineupIndex": 3
+        }
+      ],
+      "notLike": "an elderly grey-green turtle with a real shell and no cap is a different (supporting) character"
+    },
+    {
+      "id": "felix",
+      "name": "Felix",
+      "species": "dog",
+      "unique": true,
+      "aliases": [
+        "fox"
+      ],
+      "prompts": [
+        "cartoon dog",
+        "cartoon fox",
+        "dog character"
+      ],
+      "features": "brown fur with cream muzzle, floppy ears, amber eyes, heavy brows, often irritated or unimpressed, black cap worn backwards, grey t-shirt with a skateboard graphic, black track pants with white stripes, black sneakers, dark plaid backpack with red trim",
+      "palette": [
+        "#8a7560",
+        "#d8cbb8",
+        "#2b2b2b",
+        "#8a8a8a",
+        "#9c3a2a"
+      ],
+      "references": [
+        {
+          "image": "felix_sheet.webp",
+          "note": "character sheet: front, left, back, right, irritated, unimpressed"
+        },
+        {
+          "image": "fox_sheet.webp",
+          "note": "earlier design of Felix (confirmed same character): green eyes, one pointed ear, same outfit"
+        },
+        {
+          "image": "group_lineup.webp",
+          "lineupIndex": 4
+        }
+      ]
+    },
+    {
+      "id": "bunny",
+      "name": "Bunny",
+      "species": "rabbit",
+      "unique": true,
+      "prompts": [
+        "cartoon rabbit",
+        "bunny character"
+      ],
+      "features": "beige fur, long lop ears with pink insides, purple bow, round purple glasses, blue eyes, purple hoodie with a white tree logo, black track pants with white stripes, purple sneakers, purple-and-olive plaid backpack; sometimes a purple cardigan over a cream collared dress; carries a tablet",
+      "palette": [
+        "#d8c7ab",
+        "#7b5ca8",
+        "#efe3c8",
+        "#2a2a2a"
+      ],
+      "references": [
+        {
+          "image": "bunny_sheet.webp",
+          "note": "character sheet: front, left, back, right, neutral, cheerful"
+        },
+        {
+          "image": "bunny_ref.webp",
+          "note": "alternate outfit: purple cardigan over cream dress"
+        },
+        {
+          "image": "group_lineup.webp",
+          "lineupIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "otter",
+      "name": "Otter",
+      "species": "otter",
+      "unique": true,
+      "prompts": [
+        "cartoon otter",
+        "otter character"
+      ],
+      "features": "chocolate-brown fur, cream muzzle, whiskers, brown eyes, brown t-shirt with white trim, navy shorts with white stripes, dark sneakers, navy-and-olive backpack, blue water bottle",
+      "palette": [
+        "#6b4a2e",
+        "#a07850",
+        "#1f2a44"
+      ],
+      "references": [
+        {
+          "image": "otter_sheet.webp",
+          "note": "character sheet: front, left, back, right, neutral, cheerful"
+        },
+        {
+          "image": "group_lineup.webp",
+          "lineupIndex": 1
+        }
+      ]
+    }
+  ],
+  "lineups": {
+    "group_lineup.webp": {
+      "note": "all six main characters, left to right",
+      "order": [
+        "bunny",
+        "otter",
+        "raccoon",
+        "turtle",
+        "felix",
+        "suzie"
+      ]
+    }
+  },
+  "genericPrompts": [
+    "animal character"
+  ],
+  "negatives": [
+    {
+      "text": "a cartoon deer",
+      "note": "supporting character (clip9)"
+    },
+    {
+      "text": "a cartoon elephant",
+      "note": "supporting character (clip9)"
+    },
+    {
+      "text": "an elderly cartoon turtle with a real shell and no cap",
+      "note": "supporting character; not Turtle"
+    }
+  ]
+}

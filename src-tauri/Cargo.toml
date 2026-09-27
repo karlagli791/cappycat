@@ -1,0 +1,62 @@
+[package]
+name = "cappycat"
+version = "0.1.0"
+description = "Cappycat - local automated AI video editor (Tauri v2 native core)"
+authors = ["Cappycat"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.80"
+default-run = "cappycat"
+
+[workspace]
+members = ["crates/keyframes"]
+
+[lib]
+name = "cappycat_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+keyframes = { path = "crates/keyframes" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7", features = ["io"] }
+axum = "0.8"
+tower-http = { version = "0.6", features = ["cors"] }
+mime_guess = "2"
+sha1 = "0.10"
+dirs = "6"
+glob = "0.3"
+thiserror = "2"
+uuid = { version = "1", features = ["v4"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+futures-util = "0.3"
+rayon = "1.12.0"
+dunce = "1"
+tracing-appender = "0.2"
+ureq = "2"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+sha2 = "0.10"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_JobObjects", "Win32_System_Threading", "Win32_Security"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+# unwind (not abort) so a panic in an export / job thread is caught (`catch_unwind`) and reported
+# as a failed job instead of taking the whole app down
+panic = "unwind"
+strip = true

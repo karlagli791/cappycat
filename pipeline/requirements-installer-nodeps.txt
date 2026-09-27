@@ -1,0 +1,19 @@
+# Installed AFTER requirements-installer.txt with:  uv pip install --no-deps -r requirements-installer-nodeps.txt
+#
+# --no-deps keeps the resolver away from torch (demucs / julius / CLIP declare torch, and on the
+# cu130 index there is no torchaudio for torch 2.14; demucs 4.1 does not need it because the
+# pipeline decodes audio with ffmpeg). Their other dependencies are pinned in requirements-installer.txt
+# (huggingface_hub, PyYAML, safetensors, tqdm, ftfy, regex, numpy).
+#
+# Voice / background separation (Demucs v4 htdemucs_ft). julius + einops are used at runtime;
+# lameenc / sphn only by demucs' own mp3 writer / API (never imported by the pipeline, but demucs
+# imports them at module level in places). Python 3.12 Windows x64 wheels: verified.
+demucs==4.1.0
+julius==0.2.8
+einops==0.8.2
+lameenc==1.8.4
+sphn==0.2.1
+# YOLO-World's prompt encoder: ultralytics' CLIP fork (not on PyPI; the openai/clip-anytorch
+# packages import pkg_resources). Pure Python: the GitHub source archive of the tested commit,
+# so no git is needed (uv / pip build it with setuptools).
+clip @ https://github.com/ultralytics/CLIP/archive/a13192f8cb767260d7dfd98c843b0716593169e7.zip

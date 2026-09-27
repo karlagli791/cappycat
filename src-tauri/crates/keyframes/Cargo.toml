@@ -1,0 +1,12 @@
+[package]
+name = "keyframes"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Cappycat Keyframe & Motion Engine: cubic-bezier easing, keyframe interpolation and speed-curve time remapping"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+
+[dev-dependencies]
+serde_json = "1"

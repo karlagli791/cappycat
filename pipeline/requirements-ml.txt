@@ -1,0 +1,45 @@
+# Full ML path (GPU). Tested on Windows 11 / Python 3.14 / RTX 4070 Laptop with:
+#   torch 2.14.0+cu130, torchvision 0.29.0+cu130, ultralytics 8.4.162, open_clip_torch 3.3.0,
+#   transformers 5.17.0, accelerate 1.15.0, huggingface_hub 1.33.0, librosa 1.0.0,
+#   onnx 1.23.0, onnxscript 0.7.2, onnxruntime-gpu 1.30.0 (CUDA 13 build)
+#
+# 1. Torch FIRST, from the PyTorch index matching your driver (nvidia-smi "CUDA Version"):
+#      pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+#    (cu126 / cu128 for older drivers). The extra index below keeps pip on the CUDA wheels if it
+#    has to resolve torch again; nothing in this file pins torch to a CPU build.
+# 2. pip install -r requirements-ml.txt
+# 3. python -m cappycat_pipeline download-models
+#
+# onnxruntime-gpu (TransNetV2 ONNX path; the torch-CUDA path is preferred anyway) replaces the CPU
+# `onnxruntime` of requirements.txt - same import name, never install both. In a venv that already
+# has the CPU build: `pip uninstall -y onnxruntime` first. onnxruntime-gpu 1.30 is a CUDA 13 build
+# and finds its CUDA / cuDNN DLLs through the torch install (import torch first).
+--extra-index-url https://download.pytorch.org/whl/cu130
+# base (requirements.txt minus the CPU onnxruntime)
+numpy>=1.26
+opencv-python-headless>=4.9
+scenedetect>=0.6.4
+scipy>=1.11
+onnxruntime-gpu>=1.20
+torch>=2.9
+torchvision>=0.24
+ultralytics>=8.3
+# YOLO-World's prompt encoder; ultralytics would otherwise try to pip-install it at runtime
+clip @ git+https://github.com/ultralytics/CLIP.git
+open_clip_torch>=3.0
+# Grounded SAM 2 through transformers (Grounding DINO + Sam2Model need >= 4.56): no CUDA extension to build
+transformers>=4.56
+accelerate>=1.0
+huggingface_hub>=0.34
+# TransNetV2 -> ONNX export (download-models); onnxscript only for torch's dynamo exporter fallback
+onnx>=1.16
+onnxscript>=0.3
+# better beat tracking
+librosa>=0.10
+# voice / background separation (Demucs v4 htdemucs_ft, MIT). demucs 4.1 needs torchaudio only for
+# training and we decode audio with ffmpeg, so torchaudio is NOT needed (there is no torchaudio build
+# for torch 2.14 / cp314). If pip ever wants to touch torch here, install these with --no-deps:
+#   pip install --no-deps demucs==4.1.0 julius==0.2.8 einops==0.8.2 lameenc==1.8.4 sphn==0.2.1
+# (julius + einops are used at runtime; lameenc / sphn only by demucs' own mp3 writer / API, never imported here;
+#  pyyaml, safetensors, huggingface_hub, tqdm are already in the list above via transformers)
+demucs>=4.1
